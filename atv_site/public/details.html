@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes da Igreja</title>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getFirestore, collection, doc, getDocs, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+    // Configuração e inicialização do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyA7Q4Bw71c0aRi6nMyhQznR9ZMlWFBpolg",
+      authDomain: "atv-ext-uninter.firebaseapp.com",
+      projectId: "atv-ext-uninter",
+      storageBucket: "atv-ext-uninter.firebasestorage.app",
+      messagingSenderId: "937201550634",
+      appId: "1:937201550634:web:f13f79cb3a8a195c1e8a53"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    /*const db = getFirestore(app);*/ 
+  </script>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #details-container {
+      background-color: #7ac8fc33;
+      max-width: 60%;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid black;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      
+    }
+    ul {
+      list-style: none;
+      padding: 0px 10px;
+    }
+    ul li {
+      margin-bottom: 10px;
+      
+    }
+
+    li::first-letter {
+      text-transform: capitalize;
+    }
+
+  </style>
+</head>
+
+<nav class="navbar navbar-light" style="background-color: #9ad1f8">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">A hora da Missa!</a>
+    </div>
+</nav>
+
+<body>
+  <div id="details-container">
+    <h1 id="title">Carregando...</h1>
+    <p id="description"></p>
+    <img id="image" src="" alt="Imagem" style="max-width: 100%; display: none;">
+    <div id="mass-schedule" style="margin-top: 20px;"></div>
+  </div>
+
+  <script type="module">
+    import { getFirestore, collection, getDocs, getDoc, doc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+    const db = getFirestore();
+
+    // Pegar o ID da URL
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    async function displayChurchInfo(id) {
+      try {
+        const churchRef = doc(db, "igrejas", id);
+        const churchSnapshot = await getDoc(churchRef);
+
+        if (churchSnapshot.exists()) {
+          const churchData = churchSnapshot.data();
+          const nomeIgreja = churchData.nome;
+          const endereco = churchData.endereço;
+
+          document.getElementById("title").textContent = nomeIgreja;
+          document.getElementById("description").textContent = `Endereço: ${endereco}`;
+
+          // Buscar os horários de missas
+          const massCollectionRef = collection(db, "igrejas", id, "missas");
+          const massSnapshot = await getDocs(massCollectionRef);
+
+          if (!massSnapshot.empty) {
+            const daysOfWeek = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+            const masses = [];
+
+            massSnapshot.forEach((doc) => {
+              masses.push({ day: doc.id, data: doc.data() });
+            });
+
+            masses.sort((a, b) => daysOfWeek.indexOf(a.day.toLowerCase()) - daysOfWeek.indexOf(b.day.toLowerCase()));
+
+            let massHTML = "<h3>Horários das Missas:</h3><ul>";
+            masses.forEach((mass) => {
+              massHTML += `
+                <li>
+                  <strong>${mass.day}</strong>
+                  <ul>
+                    ${mass.data.horarios.map((horario) => `<li>${horario} Horas</li>`).join("")}
+                  </ul>
+                </li>
+              `;
+            });
+            massHTML += "</ul>";
+            document.getElementById("mass-schedule").innerHTML = massHTML;
+          } else {
+            document.getElementById("mass-schedule").innerHTML = "<p>Sem horários de missas disponíveis.</p>";
+          }
+        } else {
+          document.getElementById("title").textContent = "Igreja não encontrada.";
+          document.getElementById("description").textContent = "";
+        }
+      } catch (error) {
+        console.error("Erro ao buscar os dados:", error);
+        document.getElementById("title").textContent = "Erro ao carregar informações.";
+        document.getElementById("description").textContent = "";
+      }
+    }
+
+    if (id) {
+      displayChurchInfo(id);
+    } else {
+      document.getElementById("title").textContent = "ID inválido";
+    }
+  </script>
+</body>
+</html>
