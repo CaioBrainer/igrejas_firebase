@@ -3,51 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    .container-custom {
-      width: 60%;
-      margin: 50px auto;
-      padding: 10px;
-      border: 1px solid black;
-      border-radius: 15px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    }
-    .card-hover {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .card-hover img {
-      transition: transform 0.3s ease;
-    }
-    .card-hover:hover img {
-      transform: scale(1.1);
-    }
-    .hover-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 40px;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .card-hover:hover .hover-overlay {
-      opacity: 1;
-    }
-  </style>
-
+  <meta
+      name="description"
+      content="Web site criado para listar igrejas de Recife e informações de eventos"
+    />
+  <link rel="icon" href="./imagens/bible.svg" />
+  <link rel="stylesheet" href="./styles/styles.css">
+  <title>A hora da missa</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -55,86 +17,91 @@
 
 <nav class="navbar navbar-light" style="background-color: #9ad1f8;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.html" >A hora da Missa!</a>
+    <a class="navbar-brand" href="index.html" >
+      <img src="./imagens/cross.svg" height="30" class="cross-image" />
+      A Hora da Missa
+    </a>
   </div>
 </nav>
 
 <body>
 
 <div class="container-custom">
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse iste tempora odio laudantium, consequuntur dicta deserunt repellat fugit assumenda quidem inventore mollitia in id placeat magnam iure quasi dolores explicabo!Loremlor Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut eveniet sint error optio nisi, totam quisquam dolorem. Quod deserunt ipsam dicta officiis accusamus temporibus adipisci optio, assumenda saepe similique placeat.</p>
+  <p>
+    A Hora da Missa é um website criado pelos estudantes Caio Brainer e Thaísa Elvas como parte de uma Atividade Extensionista da Uninter. O intuito do projeto é ter uma utilidade prática ao mostrar as principais igrejas de Recife-PE e suas informações. Na primeira versão do projeto são mostradas as informações das igrejas e também horários das missas.
+  </p>
 </div>
 
 <div class="container-custom">
+  <h1>Igrejas de Recife e Região Metropolitana</h1>
+
   <div class="row g-4">
     <div class="col-md-4">
       <div class="card card-hover" onclick="openDetailsPage(1)">
-        <img src="https://placehold.co/400/000000/FFFFFF/png" class="card-img-top" alt="Imagem 1">
-        <div class="hover-overlay">Nome da Imagem 1</div>
+        <img src="./imagens/nossa_senhora_conceição_barro_id_1.jpg" class="card-img-top" alt="Imagem 1" height="355px">
+        <div class="hover-overlay">Igreja de Nossa Senhora Conceição - Barro</div>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="card card-hover" onclick="openDetailsPage(2)">
-        <img src="https://placehold.co/400/FFFFFF/000000/png" class="card-img-top" alt="Imagem 2">
-        <div class="hover-overlay">Nome da Imagem 2</div>
+        <img src="./imagens/Oratório de N. Sra. do Rosário_id_2.JPG" class="card-img-top" alt="Imagem 2", height="355px">
+        <div class="hover-overlay">Oratório de N. Sra. do Rosário</div>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="card card-hover" onclick="openDetailsPage(3)">
-        <img src="https://placehold.co/400" class="card-img-top" alt="Imagem 3">
-        <div class="hover-overlay">Nome da Imagem 3</div>
+        <img src="./imagens/Matriz de N. Sra. de Fátima_id_3.jpg" class="card-img-top" alt="Imagem 3", height="355px">
+        <div class="hover-overlay">Matriz de N. Sra. de Fátima</div>
       </div>
     </div>
 
       <div class="col-md-4">
         <div class="card card-hover" onclick="openDetailsPage(4)">
-          <img src="https://placehold.co/400/000000/FFFFFF/png" class="card-img-top" alt="Imagem 1">
-          <div class="hover-overlay">Nome da Imagem 4</div>
+          <img src="./imagens/madre de deus - id -4.jpg" class="card-img-top" alt="Imagem 4" height="355px">
+          <div class="hover-overlay">Igreja da Madre de Deus</div>
         </div>
       </div>
   
       <div class="col-md-4">
         <div class="card card-hover" onclick="openDetailsPage(5)">
-          <img src="https://placehold.co/400/FFFFFF/000000/png" class="card-img-top" alt="Imagem 2">
-          <div class="hover-overlay">Nome da Imagem 5</div>
+          <img src="./imagens/morro_da_conceicao_5.jpg" class="card-img-top" alt="Imagem 5" height="355px">
+          <div class="hover-overlay">Santuário do Morro da Conceição</div>
         </div>
       </div>
   
       <div class="col-md-4">
         <div class="card card-hover" onclick="openDetailsPage(6)">
-          <img src="https://placehold.co/400" class="card-img-top" alt="Imagem 3">
-          <div class="hover-overlay">Nome da Imagem 6</div>
+          <img src="./imagens/Igreja da Harmonia - Paróquia do Bom Jesus do Arraial_id_6.jpg" class="card-img-top" alt="Imagem 6" height="355px">
+          <div class="hover-overlay">Igreja da Harmonia - Paróquia do Bom Jesus</div>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="card card-hover" onclick="openDetailsPage(7)">
-          <img src="https://placehold.co/400/000000/FFFFFF/png" class="card-img-top" alt="Imagem 1">
-          <div class="hover-overlay">Nome da Imagem 4</div>
+          <img src="./imagens/matriz da varzea 7.jpg" class="card-img-top" alt="Imagem 7" height="355px">
+          <div class="hover-overlay">Matriz da Várzea</div>
         </div>
       </div>
   
       <div class="col-md-4">
         <div class="card card-hover" onclick="openDetailsPage(8)">
-          <img src="https://placehold.co/400/FFFFFF/000000/png" class="card-img-top" alt="Imagem 2">
-          <div class="hover-overlay">Nome da Imagem 5</div>
+          <img src="./imagens/jaqueira 8.jpg" class="card-img-top" alt="Imagem 8" height="355px">
+          <div class="hover-overlay">Capela de Jaqueira</div>
         </div>
       </div>
   
       <div class="col-md-4">
         <div class="card card-hover" onclick="openDetailsPage(9)">
-          <img src="https://placehold.co/400" class="card-img-top" alt="Imagem 3">
-          <div class="hover-overlay">Nome da Imagem 6</div>
+          <img src="./imagens/piedade 9.jpg" class="card-img-top" alt="Imagem 9" height="355px">
+          <div class="hover-overlay">Igreja de N. Sra. da Piedade</div>
         </div>
       </div>
 
   </div>
 </div>
   
-  <!-- Bootstrap JS (opcional para interatividade adicional) -->
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
